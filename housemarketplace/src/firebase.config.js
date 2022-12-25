@@ -1,16 +1,15 @@
-
 import { initializeApp } from "firebase/app";
-import {getFirestore} from "firebase/firestore";
+import { getFirestore } from "firebase/firestore";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyDGgMKxSh6w24Pa1rL4DDFjDJhiUKPCdlo",
-  authDomain: "housemarket-place-8cdda.firebaseapp.com",
-  projectId: "housemarket-place-8cdda",
-  storageBucket: "housemarket-place-8cdda.appspot.com",
-  messagingSenderId: "317235998292",
-  appId: "1:317235998292:web:1521e7f77232a1438007c1"
+  apiKey: "AIzaSyBBcffp29xhfK5XRreD3eH6gI1KWlZmbWg",
+  authDomain: "housemarketplace-b9b54.firebaseapp.com",
+  projectId: "housemarketplace-b9b54",
+  storageBucket: "housemarketplace-b9b54.appspot.com",
+  messagingSenderId: "129797438113",
+  appId: "1:129797438113:web:f05b5a3a6094ecb00f0ee0"
 };
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-export const db  = getFirestore();
+export const db = getFirestore()
