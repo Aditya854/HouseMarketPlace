@@ -20,6 +20,8 @@ function OAuth() {
       const docRef = doc(db, 'users', user.uid)
       const docSnap = await getDoc(docRef)
 
+      // check
+      
       // If user, doesn't exist, create user
       if (!docSnap.exists()) {
         await setDoc(doc(db, 'users', user.uid), {
