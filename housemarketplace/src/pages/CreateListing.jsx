@@ -99,17 +99,17 @@ function CreateListing()
           );
           const data = await response.json();
           
-        if(response.status==200)
-        {
-          geolocation.lat = data[0].lat ?? 0
-              geolocation.lng = data[0].lon ?? 0
+          if(response.status==200)
+          {
+            geolocation.lat = data[0].lat ?? 0
+                geolocation.lng = data[0].lon ?? 0
 
-              console.log(geolocation.lat)
-              console.log(geolocation.lng)
-              console.log(response.status)
-              location = data[0].display_name
-              console.log(location)
-        }
+                console.log(geolocation.lat)
+                console.log(geolocation.lng)
+                console.log(response.status)
+                location = data[0].display_name
+                console.log(location)
+          }
          else{
           location = undefined
          }
@@ -128,55 +128,57 @@ function CreateListing()
           location=address
         }
 
-     setLoading(false)
+          // setLoading(false)
         // Store image in firebase
-        // const storeImage = async (image) => {
-        //   return new Promise((resolve, reject) => {
-        //     const storage = getStorage()
-        //     const fileName = `${auth.currentUser.uid}-${image.name}-${uuidv4()}`
+        const storeImage = async (image) => {
+          return new Promise((resolve, reject) => {
+            const storage = getStorage()
+            const fileName = `${auth.currentUser.uid}-${image.name}-${uuidv4()}`
     
-        //     const storageRef = ref(storage, 'images/' + fileName)
+            const storageRef = ref(storage, 'images/' + fileName)
     
-        //     const uploadTask = uploadBytesResumable(storageRef, image)
+            const uploadTask = uploadBytesResumable(storageRef, image)
     
-        //     uploadTask.on(
-        //       'state_changed',
-        //       (snapshot) => {
-        //         const progress =
-        //           (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-        //         console.log('Upload is ' + progress + '% done')
-        //         switch (snapshot.state) {
-        //           case 'paused':
-        //             console.log('Upload is paused')
-        //             break
-        //           case 'running':
-        //             console.log('Upload is running')
-        //             break
-        //           default:
-        //             break
-        //         }
-        //       },
-        //       (error) => {
-        //         reject(error)
-        //       },
-        //       () => {
-        //         // Handle successful uploads on complete
-        //         // For instance, get the download URL: https://firebasestorage.googleapis.com/...
-        //         getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-        //           resolve(downloadURL)
-        //         })
-        //       }
-        //     )
-        //   })
-        // }
+            uploadTask.on(
+              'state_changed',
+              (snapshot) => {
+                const progress =
+                  (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+                console.log('Upload is ' + progress + '% done')
+                switch (snapshot.state) {
+                  case 'paused':
+                    console.log('Upload is paused')
+                    break
+                  case 'running':
+                    console.log('Upload is running')
+                    break
+                  default:
+                    break
+                }
+              },
+              (error) => {
+                reject(error)
+              },
+              () => {
+                // Handle successful uploads on complete
+                // For instance, get the download URL: https://firebasestorage.googleapis.com/...
+                getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+                  resolve(downloadURL)
+                })
+              }
+            )
+          })
+        }
     
-        // const imgUrls = await Promise.all(
-        //   [...images].map((image) => storeImage(image))
-        // ).catch(() => {
-        //   setLoading(false)
-        //   toast.error('Images not uploaded')
-        //   return
-        // })
+        const imgUrls = await Promise.all(
+          [...images].map((image) => storeImage(image))
+        ).catch(() => {
+          setLoading(false)
+          toast.error('Images not uploaded')
+          return
+        })
+
+        console.log(imgUrls)
     
         // const formDataCopy = {
         //   ...formData,
@@ -194,7 +196,9 @@ function CreateListing()
         // setLoading(false)
         // toast.success('Listing saved')
         // navigate(`/category/${formDataCopy.type}/${docRef.id}`)
-      }
+
+        setLoading(false)
+}
 
       const onMutate = (e) => {
         let boolean = null
