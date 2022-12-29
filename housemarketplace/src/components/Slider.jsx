@@ -65,7 +65,8 @@ function Slider() {
                         <SwiperSlide
                         key={id}
                         onClick={() => navigate(`/category/${data.type}/${id}`)}
-                        >
+                        > 
+    
                         <div
                             style={{
                             background: `url(${data.imageUrls[0]}) center no-repeat`,

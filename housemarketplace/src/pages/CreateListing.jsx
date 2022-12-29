@@ -17,6 +17,7 @@ import Spinner from '../components/Spinner'
 function CreateListing()
 {
     const [loading, setLoading] = useState(false)
+    // eslint-disable-next-line
     const [geolocationEnabled, setGeolocationEnabled] = useState(true)
     const [formData, setFormData] = useState({
       type: 'rent',
@@ -99,7 +100,7 @@ function CreateListing()
           );
           const data = await response.json();
           
-          if(response.status==200)
+          if(response.status===200)
           {
             geolocation.lat = data[0].lat ?? 0
                 geolocation.lng = data[0].lon ?? 0
