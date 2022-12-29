@@ -170,7 +170,7 @@ function CreateListing()
           })
         }
     
-        const imgUrls = await Promise.all(
+        const imageUrls = await Promise.all(
           [...images].map((image) => storeImage(image))
         ).catch(() => {
           setLoading(false)
@@ -178,26 +178,26 @@ function CreateListing()
           return
         })
 
-        console.log(imgUrls)
+        // console.log(imageUrls)
     
-        // const formDataCopy = {
-        //   ...formData,
-        //   imgUrls,
-        //   geolocation,
-        //   timestamp: serverTimestamp(),
-        // }
+        const formDataCopy = {
+          ...formData,
+          imageUrls,
+          geolocation,
+          timestamp: serverTimestamp(),
+        }
     
-        // formDataCopy.location = address
-        // delete formDataCopy.images
-        // delete formDataCopy.address
-        // !formDataCopy.offer && delete formDataCopy.discountedPrice
+        formDataCopy.location = address
+        delete formDataCopy.images
+        delete formDataCopy.address
+        !formDataCopy.offer && delete formDataCopy.discountedPrice
     
-        // const docRef = await addDoc(collection(db, 'listings'), formDataCopy)
-        // setLoading(false)
-        // toast.success('Listing saved')
-        // navigate(`/category/${formDataCopy.type}/${docRef.id}`)
-
+        const docRef = await addDoc(collection(db, 'listings'), formDataCopy)
         setLoading(false)
+        toast.success('Listing saved')
+        navigate(`/category/${formDataCopy.type}/${docRef.id}`)
+
+        // setLoading(false)
 }
 
       const onMutate = (e) => {
