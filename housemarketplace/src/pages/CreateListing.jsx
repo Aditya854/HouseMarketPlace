@@ -96,7 +96,7 @@ function CreateListing()
     
         if (geolocationEnabled) {
           const response = await fetch(
-            `https://us1.locationiq.com/v1/search?key=pk.c16b83653b5b349084af4f838c0e91b1&q=${address}&format=json`
+            `https://us1.locationiq.com/v1/search?key=${process.env.REACT_APP_GEOCODE_API_KEY}&q=${address}&format=json`
           );
           const data = await response.json();
           
